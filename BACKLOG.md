@@ -1,5 +1,60 @@
 # Vanik Improvement Backlog (Initial Consolidation)
 
+## what's to be done first and asap
+If you only have 2–3 days to get this repo into a safer, demo‑ready state, focus on the minimum set that (a) removes highest risk (security & data corruption), (b) stabilizes core flows, and (c) enables confidence to demo or hand over. Skip polish, advanced analytics, and non-blocking UI tweaks.
+
+### Ultra‑Critical (Day 1)
+1. Implement real authentication
+	- Add `users` table (username, password_hash, role, is_active, timestamps)
+	- Hash passwords with bcrypt on create/update
+	- Replace in‑memory tokens with signed JWT (PyJWT) including `exp` (e.g. 30–60 min) & `sub`
+	- Middleware: reject expired tokens; unify 401 response shape
+	- Seed one admin user via a simple migration or seed script
+2. Fix audit logging & status consistency
+	- Resolve `audit_log` vs `audit_logs` naming mismatch (rename table OR create `CREATE VIEW audit_logs AS SELECT * FROM audit_log`)
+	- Decide canonical order statuses (e.g. `"Order Placed" | "Order Received" | "Order Cancelled"`) and update DB constraint + existing rows + frontend mapping
+
+### High Risk Data Integrity (Day 2)
+3. Add schema constraints & migrations
+	- Introduce first formal migration set (dump existing CREATE TABLE statements into versioned SQL or Django migrations)
+	- Remove runtime table creation from `DatabaseManager.init_tables()` (guard or delete after migration)
+	- Add CHECK constraints: `current_weight >= 0`, `reserved_weight >= 0`, `reserved_weight <= current_weight`
+	- Add NOT NULL where logically required (e.g., foreign keys, weights)
+4. Enforce atomic inventory reservation
+	- Ensure all reservation code paths use a single transaction with `SELECT ... FOR UPDATE` on lots
+	- Add a protective function that revalidates post‑update invariants, raising/rolling back if violated
+
+5. Minimal test harness (pytest)
+	- Test A: GRN creation inserts lot + inbound transaction
+	- Test B: Sales order reserves inventory without overshooting available_weight
+	- Test C: Challan conversion decreases current_weight and never goes negative
+6. Health & environment basics
+	- Add `/api/health` endpoint (DB connectivity + version)
+	- Add `.env.example` (DATABASE_URL, JWT_SECRET, DEMO_ADMIN credentials placeholder)
+
+### Hardening & Cleanup (Day 3)
+7. Standard response envelope for new/modified endpoints
+	- `{ "success": true|false, "data": ..., "error": { code, message }? }`
+	- Apply at least to auth, health, orders, inventory endpoints touched above
+8. Critical indexes
+	- `CREATE INDEX IF NOT EXISTS idx_sales_orders_date_status ON sales_orders(order_date, status);`
+	- `CREATE INDEX IF NOT EXISTS idx_inventory_lots_product_location ON inventory_lots(product_id, location_id);`
+	- `CREATE INDEX IF NOT EXISTS idx_inventory_transactions_reference ON inventory_transactions(reference_type, reference_id);`
+9. Remove or clearly mark unused packages (e.g., DRF if not leveraged yet) to reduce confusion
+
+### Deliverables & Acceptance Checklist
+- [ ] Can log in with seeded admin; token expires properly
+- [ ] Negative or over‑reservation impossible (constraint + test proves)
+- [ ] Order statuses consistent across DB, API, UI
+- [ ] Audit logs endpoint returns data (no table name error)
+- [ ] Tests: all 3 core integrity tests pass locally
+- [ ] Health endpoint returns JSON with status=healthy when DB reachable
+- [ ] README updated with quick start + auth note
+
+> Stretch (only if ahead of schedule): Add rate limiting to login & mutation endpoints; add simple role field enforcement in middleware.
+
+---
+
 This file centralizes refinement items (UI polish + missing features) inferred from code, docs (`CONTEXT.md`), and current implementation state. Use it as a living backlog. Priorities:
 - P0 = Critical / foundational gap
 - P1 = High impact / near-term
