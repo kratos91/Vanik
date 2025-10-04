@@ -1,0 +1,20 @@
+I see following issues -
+1. In Master Data -> Processors page, can you remove the “Add processor” button, as we already have a button called “Add new” which is doing exactly the same thing. Also the heading “Processors”, “Add new” button, the search bar and the processor information table is inside a box, but on the supplier page, all these elements are not inside a box, can you make changes to this page, to make the user experience consistent.
+2. In WIP management, the main objective of this is to track all the SKUs being sent outside for processing and then also tracking them we they are received back. I want to track both outbound and inbound processing challans and for that I think below changes are required-
+    1. Remove “Add New” button, as “Add new” and “New WIP Inflow” are doing the exact same thing.
+    2. Rename “New WIP Inflow” button to “New WIP Challan”. This will be used to track all the outbound processing orders. 
+    3. In “Create New WIP Inflow” pop up form, do following -
+        1. Rename the page title from “Create New WIP Inflow” to “Create New WIP Challan”
+        2. Rename “Inflow Date” to “Date”.
+        3. Remove receipt location.
+        4. Remove output weight
+        5. Rename input weight to just weight.
+        6. Details regarding what is being sent for processing is missing in the form. Provide a way for user to add SKUs being sent for processing.
+        7. Rename “Create WIP Inflow” button at the bottom of this pop window to “Create WIP Challan” 
+    4. Once a new WIP challan is created, it should be displayed in the WIP record table.
+    5. Provide a functionality to mark a WIP challan as received. When a challan is being marked as received, it should ask user to enter receiving date, receiving weight and in which warehouse it is being received. Selecting warehouse should be optional.
+    6. Remove the duplicate search text boxes.
+    7. There are 3 boxes displaying “Total inflows”, “active processors” and “processing locations”, I want them to display “Total challans issued” (this will be total number of challans issued), “Out for Processing” (challans that are not yet marked received), “Total challans marked received” (challans that are marked received). You can choose better names to be displayed.
+    8. Make relevant database and backend changes for the above requirements.
+    9.  Please test all CRUD operations on WIP management page and keep the dummy data, so that I can use it to test as well.
+3. Post completion of above activities, test all the functionalities added and bugs fixed, in order to ensure software quality.

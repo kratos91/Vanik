@@ -1,0 +1,260 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .grid-cols-15 {
+    grid-template-columns: repeat(15, minmax(0, 1fr));
+  }
+}
+
+:root {
+  --background: hsl(0, 0%, 98%);
+  --foreground: hsl(240, 10%, 3.9%);
+  --muted: hsl(210, 40%, 96%);
+  --muted-foreground: hsl(215.4, 16.3%, 46.9%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 10%, 3.9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 10%, 3.9%);
+  --border: hsl(214.3, 31.8%, 91.4%);
+  --input: hsl(214.3, 31.8%, 91.4%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(210, 40%, 96%);
+  --secondary-foreground: hsl(222.2, 84%, 4.9%);
+  --accent: hsl(210, 40%, 96%);
+  --accent-foreground: hsl(222.2, 84%, 4.9%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(222.2, 84%, 4.9%);
+  --radius: 0.5rem;
+  
+  /* Material Design inspired colors */
+  --surface: hsl(0, 0%, 98%);
+  --surface-variant: hsl(210, 40%, 96%);
+  --primary-blue: hsl(207, 90%, 54%);
+  --primary-blue-dark: hsl(211, 100%, 43%);
+  --success: hsl(142, 76%, 36%);
+  --warning: hsl(45, 93%, 47%);
+  --error: hsl(0, 72%, 51%);
+  
+  /* Sidebar colors */
+  --sidebar-background: hsl(0, 0%, 100%);
+  --sidebar-foreground: hsl(240, 5.9%, 10%);
+  --sidebar-primary: hsl(207, 90%, 54%);
+  --sidebar-primary-foreground: hsl(210, 40%, 98%);
+  --sidebar-accent: hsl(210, 40%, 96%);
+  --sidebar-accent-foreground: hsl(240, 5.9%, 10%);
+  --sidebar-border: hsl(214.3, 31.8%, 91.4%);
+  --sidebar-ring: hsl(222.2, 84%, 4.9%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(222.2, 84%, 4.9%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  
+  --surface: hsl(240, 10%, 3.9%);
+  --surface-variant: hsl(240, 3.7%, 15.9%);
+  
+  --sidebar-background: hsl(240, 10%, 3.9%);
+  --sidebar-foreground: hsl(0, 0%, 98%);
+  --sidebar-primary: hsl(207, 90%, 54%);
+  --sidebar-primary-foreground: hsl(210, 40%, 98%);
+  --sidebar-accent: hsl(240, 3.7%, 15.9%);
+  --sidebar-accent-foreground: hsl(0, 0%, 98%);
+  --sidebar-border: hsl(240, 3.7%, 15.9%);
+  --sidebar-ring: hsl(240, 4.9%, 83.9%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased text-foreground;
+    background-color: hsl(var(--surface));
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  .material-shadow {
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .material-shadow-lg {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stats-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s;
+  }
+  
+  .stats-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: colors 150ms;
+  }
+  
+  .nav-item-active {
+    color: hsl(var(--primary));
+    background-color: hsl(var(--primary) / 0.1);
+  }
+  
+  .nav-item-inactive {
+    color: hsl(240 5.9% 10%);
+  }
+  
+  .nav-item-inactive:hover {
+    background-color: hsl(210 40% 96%);
+  }
+  
+  .transaction-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .transaction-badge-grn {
+    background-color: hsl(var(--success) / 0.1);
+    color: hsl(var(--success));
+  }
+  
+  .transaction-badge-sale {
+    background-color: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+  }
+  
+  .transaction-badge-wip {
+    background-color: hsl(var(--warning) / 0.1);
+    color: hsl(var(--warning));
+  }
+  
+  .alert-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid;
+  }
+  
+  .alert-card-warning {
+    background-color: hsl(var(--warning) / 0.05);
+    border-color: hsl(var(--warning) / 0.2);
+  }
+  
+  .alert-card-error {
+    background-color: hsl(var(--error) / 0.05);
+    border-color: hsl(var(--error) / 0.2);
+  }
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground));
+}
+
+/* Form styles */
+.form-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid hsl(var(--input));
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  ring: 2px solid hsl(var(--primary));
+  border-color: hsl(var(--primary));
+}
+
+.form-select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid hsl(var(--input));
+  border-radius: 0.5rem;
+  background-color: white;
+  transition: all 0.2s;
+}
+
+.form-select:focus {
+  outline: none;
+  ring: 2px solid hsl(var(--primary));
+  border-color: hsl(var(--primary));
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid hsl(var(--input));
+  border-radius: 0.5rem;
+  resize: none;
+  transition: all 0.2s;
+}
+
+.form-textarea:focus {
+  outline: none;
+  ring: 2px solid hsl(var(--primary));
+  border-color: hsl(var(--primary));
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  margin-bottom: 0.5rem;
+}

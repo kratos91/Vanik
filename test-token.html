@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Token Test</title>
+</head>
+<body>
+    <h1>Token Authentication Test</h1>
+    <button onclick="testLogin()">Test Login</button>
+    <button onclick="testMe()">Test /api/me</button>
+    <button onclick="checkLocalStorage()">Check localStorage</button>
+    <div id="output"></div>
+
+    <script>
+        function log(message) {
+            document.getElementById('output').innerHTML += message + '<br>';
+        }
+
+        async function testLogin() {
+            log('Testing login...');
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: 'admin',
+                        password: 'admin123'
+                    })
+                });
+                
+                const data = await response.json();
+                log('Login response: ' + JSON.stringify(data));
+                
+                if (data.token) {
+                    localStorage.setItem('auth_token', data.token);
+                    log('Token stored in localStorage: ' + data.token);
+                }
+            } catch (error) {
+                log('Login error: ' + error);
+            }
+        }
+
+        async function testMe() {
+            log('Testing /api/me...');
+            const token = localStorage.getItem('auth_token');
+            log('Token from localStorage: ' + token);
+            
+            try {
+                const response = await fetch('/api/me', {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+                
+                const data = await response.json();
+                log('/api/me response: ' + JSON.stringify(data));
+            } catch (error) {
+                log('/api/me error: ' + error);
+            }
+        }
+
+        function checkLocalStorage() {
+            const token = localStorage.getItem('auth_token');
+            log('Current token in localStorage: ' + token);
+        }
+    </script>
+</body>
+</html>

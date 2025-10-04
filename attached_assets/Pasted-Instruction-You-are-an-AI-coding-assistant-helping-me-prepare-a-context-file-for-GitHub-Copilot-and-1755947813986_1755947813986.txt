@@ -1,0 +1,136 @@
+Instruction:
+You are an AI coding assistant helping me prepare a context file for GitHub Copilot and other AI coding agents. This context file must contain all essential technical information about my web application so that another AI coding agent can understand the project deeply and help me extend it, fix bugs, and optimize performance without needing to explore the entire codebase from scratch.
+
+Please generate a single, comprehensive CONTEXT.md file with the following sections:
+
+1. Project Overview
+
+High-level description of the web application (purpose, target users, and business flows).
+
+Key problems the app solves.
+
+2. Technology Stack
+
+Frontend libraries/frameworks, backend stack, database, and any dev tools.
+
+Versions where relevant (React version, Django version, PostgreSQL, etc.).
+
+3. System & Project Architecture
+
+Monorepo or polyrepo setup.
+
+Folder/file structure with descriptions of important files (frontend, backend, shared code, config).
+
+Build tools and package managers used (npm, pip, etc.).
+
+4. API Documentation
+
+Complete catalog of RESTful API endpoints.
+
+For each endpoint:
+
+Method (GET/POST/PUT/DELETE)
+
+URL path
+
+Request body schema (with sample JSON)
+
+Response body schema (with sample JSON)
+
+Authentication/authorization rules if any
+
+5. Database Schema
+
+Entity-relationship overview (tables and relationships).
+
+Field-level schema for each major table (column names, types, constraints).
+
+Any indexing or partitioning strategies.
+
+Sample CREATE TABLE statements for clarity.
+
+6. Frontend Architecture
+
+Routing structure (protected routes, lazy loading).
+
+Key component types (UI, modals, layouts, data tables).
+
+State management patterns (TanStack Query usage).
+
+API client layer (e.g., how apiRequest works).
+
+Example of data fetching, form handling, and table usage.
+
+7. Backend Architecture
+
+Controller hierarchy and role (CRUD, specialized, business logic).
+
+Database interaction pattern (connection pooling, retry logic).
+
+API response pattern (standardized wrappers).
+
+Authentication & authorization flow (JWT, bcrypt, role-based access).
+
+8. Key Business Workflows
+
+Step-by-step explanation of:
+
+Inventory management (purchase → GRN → lot creation → transactions).
+
+Sales flow (order → stock reservation → challan → inventory update).
+
+WIP (job orders → challans → inflows).
+
+Example request/response sequences for each workflow.
+
+9. Code Style & Development Guidelines
+
+TypeScript and Python conventions (strict typing, type hints, docstrings).
+
+Logging and error handling strategies.
+
+Frontend component reuse and accessibility guidelines.
+
+API design principles (consistent naming, HTTP status codes, validation).
+
+10. Performance & Optimization Considerations
+
+Current bottlenecks and known issues.
+
+Query optimization strategies (indexes, batching).
+
+Frontend optimizations (lazy loading, optimistic updates).
+
+Memory and resource management guidelines.
+
+11. Common Bugs & Fixes
+
+Known recurring issues (auth token expiry, stale state, mismatched data structures).
+
+Solutions/patterns to resolve them.
+
+12. Testing Guidelines
+
+Frontend test patterns (unit, integration, mocks).
+
+Backend test strategies (unit, DB integration, API endpoint tests).
+
+Performance testing best practices.
+
+13. Deployment & Environment Setup
+
+Environment variables with sample .env.example.
+
+Dev vs production configs.
+
+Deployment scripts or notes (Docker, Replit hosting, or others).
+
+Monitoring & health checks.
+
+Output Format:
+
+Provide all of the above in a single well-structured CONTEXT.md file using Markdown headings and subheadings.
+
+Include sample code snippets, JSON request/response examples, and schema definitions wherever applicable.
+
+The file should be self-sufficient, meaning GitHub Copilot can rely on it without needing to scan the entire codebase.

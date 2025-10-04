@@ -1,0 +1,34 @@
+Now let’s work on sales and processing.
+I want to completely revamp the sales and processing.
+
+Instead of sales and processing parent categories and their sub-categories present in the left navigation panel, I want following categories and sub-categories.
+
+Category - Orders
+Sub	Categories under “Orders” category - Sales Orders, Purchase Orders and Job Orders.
+
+Category - Challans
+Sub	Categories under “Challans” category - Sales Challan
+
+Now I will define what actually each sub-category is for.
+
+Purchase Orders -
+This is will be used to track the purchase order that has been placed with suppliers. This page will be exactly same as GRN page. Any changes, that is, creation, updation or deletion of a purchase order should not have any effect on inventory. This page is purely for purchase tracking purpose only.
+Also when a new Purchase order is created, it should be in “Order Placed” State.
+Post that the user can choose to change the state to “Order Received” or “Order Cancelled”.
+There should also be an option to convert this purchase order to a GRN entry and the user flow should be as follows -
+1. User clicks on an action button to convert purchase order to a GRN.
+2. New GRN form opens with all its details filled with values from purchase order.
+3. All the fields in the GRN form should be editable as in the original GRN creation form.
+4. Once a purchase order is converted to GRN, the status of the Purchase order should be changed to “Converted to GRN”.
+
+Sales Orders -
+This is will be used to track the sales order that have been received from customers. This page should be created on the similar line as Purchase order page. Any changes, that is, creation, updation or deletion of a sales order should not have any effect on inventory. This page is purely for sales order tracking purpose only.
+Also when a new Sales order is created, it should be in “New” State.
+Post that the user can choose to change the state to “Completed” or “Cancelled” or “In-Progress”
+
+Job Orders -
+This is will be used to track the job order that has been placed with processor. This page should be created on the similar line as Purchase order page. Any changes, that is, creation, updation or deletion of a job order should not have any effect on inventory. This page is purely for job order tracking purpose only.
+Also when a new job order is created, it should be in “In-Progress” State.
+Post that the user can choose to change the state to “Sent for processing” or “Received” or “Cancelled”
+
+I will define sales challan page later, for now only make changes to left navigation panel.
